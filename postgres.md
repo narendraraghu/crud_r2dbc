@@ -4,7 +4,7 @@ sudo -u postgres psql
 
 ALTER USER postgres PASSWORD 'newpassword';
 
-Function
+##Function call from R2DBC for Integer
 select * from employee;
 
 CREATE OR REPLACE FUNCTION GetEmployeeById(emp_age INT)  
@@ -25,7 +25,17 @@ psql -c "ALTER USER postgres WITH PASSWORD 'password';"
 
 sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'password';"
 
+##Function call from R2DBC for String
 
+CREATE OR REPLACE FUNCTION GetEmployeeByDepartment(emp_dept TEXT)  
+RETURNS Employee
+LANGUAGE SQL   
+AS   
+$$  
+SELECT * FROM Employee WHERE department = emp_dept;  
+$$;
+
+SELECT * FROM GetEmployeeByDepartment('abc') ;
 
 
 
