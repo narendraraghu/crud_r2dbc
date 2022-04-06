@@ -25,7 +25,7 @@ public class EmployeeController {
     @PostMapping("/save")
     public Mono<Employee> saveEmployee1(@RequestBody Employee employee) {
         System.out.println(" Employee " + employee.getId() + " " + employee.getName() + " " + employee.getDepartment() + " " + employee.getCompanyId());
-        return employeeRepository.saveEmployee(employee.getId(), employee.getName(), employee.getDepartment(), employee.getCompanyId());
+        return employeeRepository.saveEmployee(employee.getId(), employee.getName(), employee.getDepartment(), employee.getCompanyId(), employee.getAge());
     }
 
 
@@ -58,5 +58,15 @@ public class EmployeeController {
 
         return employeeRepository.findEmployeeByCompanyId(cmpanyID);
 
+    }
+
+    @GetMapping("/age/{age}")
+    public Flux<Employee> findByAge(@PathVariable("age") int age) {
+        Flux<Employee> emp = employeeRepository.findEmployeeByAge(age);
+        emp.subscribe(employee ->
+        {
+            System.out.println(("Finished processing Foo with Id {}"+ employee.getId()));
+        });
+        return emp;
     }
 }

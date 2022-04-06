@@ -16,11 +16,12 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Employee {
 
   @Id
-  private Long id;
+  private String id;
 
   private String name;
 
   private String department;
+  private Integer age;
 
   @Column("company_id")
   private String companyId;
