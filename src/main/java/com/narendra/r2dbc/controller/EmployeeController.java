@@ -69,4 +69,14 @@ public class EmployeeController {
         });
         return emp;
     }
+
+    @GetMapping("/dept/{dept}")
+    public Flux<Employee> findByDepartment(@PathVariable("dept") String dept) {
+        Flux<Employee> emp = employeeRepository.findEmployeeByDepartment(dept);
+        emp.subscribe(employee ->
+        {
+            System.out.println(("Finished processing Foo with Id {}"+ employee.getId()));
+        });
+        return emp;
+    }
 }

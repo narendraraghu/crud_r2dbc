@@ -20,5 +20,7 @@ public interface EmployeeRepository extends ReactiveCrudRepository<Employee, Lon
     @Query(value = "select * from GetEmployeeById(:age)")
     Flux<Employee> findEmployeeByAge(@Param("age")int age);
 
+    @Query(value = "select * from GetEmployeeByDepartment(:dept)")
+    Flux<Employee> findEmployeeByDepartment(@Param("dept")String dept);
 
 }
